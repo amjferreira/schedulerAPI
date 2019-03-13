@@ -1,0 +1,24 @@
+{
+  "name": "scheduler",
+  "version": "1.0.0",
+  "description": "schedule saving app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon app.js"
+  },
+  "keywords": [
+    "API",
+    "Scheduler"
+  ],
+  "author": "António Ferreira",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.10"
+  }
+}
