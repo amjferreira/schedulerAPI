@@ -14,9 +14,10 @@ class Database {
             this.connection.query(sql, args, (err, rows) => {
                 if (err)
                     return reject(err);
+                    console.log(rows);
                 resolve(rows);
             });
-        });
+        })
     }
     close() {
         return new Promise((resolve, reject) => {
