@@ -14,11 +14,12 @@
   "author": "António Ferreira",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.1.0"
   },
   "devDependencies": {
     "body-parser": "^1.18.3",
-    "mysql": "^2.16.0",
     "nodemon": "^1.18.10"
   }
 }

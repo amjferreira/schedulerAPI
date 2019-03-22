@@ -1,19 +1,21 @@
-const Database = require('../config/db')
+const sequelize = require('../config/db')
+const Sequelize = require('sequelize')
 
+const User = sequelize.define('user', {
 
-const database = new Database()
-
-module.exports = {
-    findAll: () => { return database.query("SELECT * FROM users")},
-    findOne: (userdID) => {
-        return database.query(`SELECT * FROM users where id = ${userdID}`)
+    firstname: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
-    delete: (userdID) => {
-        return database.query(`DELETE FROM users where id = ?`, userdID)
+    lastname: {
+        type: Sequelize.STRING
     },
-    insert: (user) => {
-        //var user = { firstname: "Jules", lastname: "Vernes", email: "jvernes@fiction.com" }
-
-        return database.query('INSERT INTO users SET ?', user)
+    email: {
+        type: Sequelize.STRING,
+        validate: {
+            isEmail: true
+        }
     }
-}
+}, {timestamps: false})
+
+module.exports = User

@@ -1,35 +1,24 @@
-const mysql = require('mysql')
+const Sequelize = require('sequelize')
 let config = require('./config')
 
 
-class Database {
-
-    constructor() {
-        this.connection = mysql.createConnection(config.dbConf)
-    }
-
-
-    query(sql, args) {
-        return new Promise((resolve, reject) => {
-            this.connection.query(sql, args, (err, rows) => {
-                if (err)
-                    return reject(err);
-                    console.log(rows);
-                resolve(rows);
-            });
-        })
-    }
-    close() {
-        return new Promise((resolve, reject) => {
-            this.connection.end(err => {
-                if (err)
-                    return reject(err);
-                resolve();
-            });
-        });
-    }
-}
+const sequelize = new Sequelize(config.database, 
+    config.user, config.password, { host: config.host, dialect: config.dbType })
 
 
 
-module.exports = Database
+    //making sure, its connecting properly
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been made with success!!')
+    })
+    .catch(err =>
+        console.log('Bad connection: ', err)
+    )
+
+
+
+
+
+module.exports = sequelize
