@@ -1,5 +1,6 @@
 const sequelize = require('../config/db')
 const Sequelize = require('sequelize')
+const Calendar = require('./Calendar')
 
 const User = sequelize.define('user', {
 
@@ -17,5 +18,10 @@ const User = sequelize.define('user', {
         }
     }
 }, {timestamps: false})
+
+User.associate = (models)=>{
+
+    User.hasMany(Calendar)
+}
 
 module.exports = User

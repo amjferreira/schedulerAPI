@@ -1,14 +1,15 @@
-var model = require('../models/calendarModel');
+var Calendar = require('../models/Calendar');
 
-exports.findAll = (req,res) => {
+exports.findAll = (req, res) => {
 
-    
+    Calendar.findAll
+        .then((vals) => {
+            res.send(vals)
+
+        })
+        .catch(err => {
+            console.log('Error: ', err)
+            res.sendStatus(500)
+        });
     //this should connect to the database.
-    res.send("all users are sent here")
-}
-
-exports.findById = (req, res) => {
-    console.log("inside controller")
-    //this should connect to the database.
-    res.send("one calendar should be sent here")
 }
