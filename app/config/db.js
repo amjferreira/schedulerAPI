@@ -2,12 +2,20 @@ const Sequelize = require('sequelize')
 let config = require('./config')
 
 
-const sequelize = new Sequelize(config.database, 
+const sequelize = new Sequelize(config.database,
     config.user, config.password, { host: config.host, dialect: config.dbType })
 
 
 
-    //making sure, its connecting properly
+sequelize.sync()
+    .then(() =>
+        console.log('database is syncronized!'))
+    .catch(err =>
+        console.log("there was an error", err)
+    )
+
+    /*
+//making sure, its connecting properly
 sequelize
     .authenticate()
     .then(() => {
@@ -17,7 +25,7 @@ sequelize
         console.log('Bad connection: ', err)
     )
 
-
+*/
 
 
 

@@ -11,6 +11,8 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => res.send('App is working'))
 
 app.use('/api', routes.user)
+app.use('/api', routes.calendar)
+
 
 //@TODO put port in configs
 const port = 8080

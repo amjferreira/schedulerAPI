@@ -1,6 +1,6 @@
-const sequelize = require('../config/db'),
-    Sequelize = require('sequelize'),
-    User = require('./User')
+const sequelize = require('../config/db')
+const Sequelize = require('sequelize')
+const User = require('./User')
 
 
 const Calendar = sequelize.define('calendar', {
@@ -14,9 +14,7 @@ const Calendar = sequelize.define('calendar', {
     }
 });
 
-Calendar.associate = (models) => {
 
-    Calendar.belongsTo(User)
-};
+//Calendar.belongsTo(User, { as: 'UserRef', foreignKey: 'userId' });
 
 module.exports = Calendar

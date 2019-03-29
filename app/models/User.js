@@ -17,11 +17,10 @@ const User = sequelize.define('user', {
             isEmail: true
         }
     }
-}, {timestamps: false})
+}, { timestamps: false })
 
-User.associate = (models)=>{
 
-    User.hasMany(Calendar)
-}
+User.hasMany(Calendar, {as: 'calendars', foreignKey: 'userId' })
+
 
 module.exports = User
