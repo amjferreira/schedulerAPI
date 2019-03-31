@@ -17,10 +17,8 @@ const User = sequelize.define('user', {
             isEmail: true
         }
     }
-}, { timestamps: false })
+});
 
-
-User.hasMany(Calendar, {as: 'calendars', foreignKey: 'userId' })
-
+User.hasMany(Calendar, { as: 'calendars', foreignKey: { user_id: { allowNull: false } } })
 
 module.exports = User

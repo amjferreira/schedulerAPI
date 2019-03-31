@@ -1,8 +1,8 @@
 const sequelize = require('../config/db')
 const Sequelize = require('sequelize')
-const Event = require('./Event')
 
-const Calendar = sequelize.define('calendar', {
+
+const EventType = sequelize.define('event_type', {
     name: {
         type: Sequelize.STRING,
         allowNull: false
@@ -11,7 +11,6 @@ const Calendar = sequelize.define('calendar', {
         type: Sequelize.STRING,
         allowNull: true
     }
-});
+},{ timestamps: false });
 
-Calendar.hasMany(Event, { as: 'events', foreignKey: { calendar_id: { allowNull: false } } })
-module.exports = Calendar
+module.exports = EventType

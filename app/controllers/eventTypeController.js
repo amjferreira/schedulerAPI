@@ -1,11 +1,11 @@
-var Calendar = require('../models/Calendar');
+var Event = require('../models/Event');
 
 
-const CalendarController = {
+const EventController = {
 
     findAll: (req, res) => {
 
-        Calendar.findAll()
+        Event.findAll()
             .then(function (vals) {
                 res.send(vals)
             })
@@ -18,7 +18,7 @@ const CalendarController = {
 
     findById: (req, res) => {
 
-        Calendar.findByPk(req.params.id).then((val) => {
+        Event.findByPk(req.params.id).then((val) => {
             if (val != null)
                 res.send(val)
             else
@@ -32,7 +32,7 @@ const CalendarController = {
 
     deleteById: (req, res) => {
 
-        Calendar.destroy(
+        Event.destroy(
             {
                 where: { id: req.params.id }
             }
@@ -45,18 +45,10 @@ const CalendarController = {
     },
 
 
-    insert: (req, res, userId = 0) => {
+    insert: (req, res) => {
 
-        console.log('user id is:',req.params.user)
         let data = { name, description } = req.body
-        if (userId == 0) {
-            data['user_id'] = req.params.user
-        } else {
-            data['user_id'] = userId
-        }
-
-        console.log('data is:',data)
-        Calendar.create(data).then((entry) => {
+        Event.create(data).then((entry) => {
             res.append('id', entry.id).sendStatus(201)
         }).catch(err => {
             console.log(err.message)
@@ -66,15 +58,15 @@ const CalendarController = {
     },
 
     patch: (req, res) => {
-        let calendar = {}
+        let event = {}
 
         for (b in req.body) {
 
-            calendar[b] = req.body[b]
+            event[b] = req.body[b]
         }
-        console.log("\ncalendar is: \n", calendar)
+        console.log("\nEvent is: \n", event)
 
-        Calendar.update(calendar, { where: { id: req.params.id } })
+        Event.update(event, { where: { id: req.params.id } })
             .then(() => {
                 res.sendStatus(200)
             }).catch(err => {
@@ -84,4 +76,31 @@ const CalendarController = {
     }
 }
 
-module.exports = CalendarController
+
+const EventType = {
+
+    insert: (req, res) => {
+
+        let data = { name, description } = req.body
+        Event.create(data).then((entry) => {
+            res.append('id', entry.id).sendStatus(201)
+        }).catch(err => {
+            console.log(err.message)
+            res.sendStatus(500)
+        })
+
+    },
+    findAll: (req, res) => {
+
+        Event.findAll()
+            .then(function (vals) {
+                res.send(vals)
+            })
+            .catch(err => {
+                console.log(err.message)
+                res.sendStatus(500)
+            })
+    },
+}
+
+module.exports = EventController

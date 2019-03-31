@@ -8,7 +8,7 @@ router.get('/calendars', controller.findAll)
 
 router.get('/calendars/:id', controller.findById)
 
-//router.post('/calendars', controller.insert)
+router.post('/users/:user/calendars', controller.insert)
 
 router.delete('/calendars/:id', controller.deleteById)
 
